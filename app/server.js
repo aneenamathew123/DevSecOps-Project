@@ -5,6 +5,10 @@ app.get("/", (req, res) => {
   res.send("Hello DevSecOps Project 🚀");
 });
 
-app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
-  console.log("Server running on port 3000");
-});
+if (require.main === module) {
+  app.listen(3000, "0.0.0.0", () => {
+    console.log("Server running on port 3000");
+  });
+}
+
+module.exports = app;
