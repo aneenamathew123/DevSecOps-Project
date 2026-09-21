@@ -61,6 +61,7 @@ jobs:
 
       permissions: 
         contents: read
+        actions: read
         security-events: write
 
       steps:
