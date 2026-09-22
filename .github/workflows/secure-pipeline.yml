@@ -118,6 +118,16 @@ jobs:
             load: true
             tags: ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }}
 
+       - name: Locate brace-expansion
+         run: |
+               docker run --rm ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} \
+               find /app/node_modules -path '*/brace-expansion/package.json' -print
+               
+       - name: Check production dependency tree
+         run: |
+               docker run --rm ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} \
+               npm ls brace-expansion --omit=dev
+
 
          ## Image scan for known vulnerabilities
        - name: Run Trivy vulnerability scanner
