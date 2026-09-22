@@ -8,7 +8,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY ./app/package*.json /app
-RUN npm ci
-RUN npm ls brace-expansion
+RUN npm ci --omit=dev
 COPY ./app /app
 CMD [ "node", "server.js"]

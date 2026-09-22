@@ -118,10 +118,6 @@ jobs:
             load: true
             tags: ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }}
 
-       - name: Check image
-         run: |
-              docker images
-              docker run --rm ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} npm ls brace-expansion
 
          ## Image scan for known vulnerabilities
        - name: Run Trivy vulnerability scanner
