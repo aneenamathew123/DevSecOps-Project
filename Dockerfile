@@ -9,5 +9,6 @@ RUN apt-get update \
 WORKDIR /app
 COPY ./app/package*.json /app
 RUN npm ci
+RUN npm ls brace-expansion
 COPY ./app /app
 CMD [ "node", "server.js"]
