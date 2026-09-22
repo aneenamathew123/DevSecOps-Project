@@ -1,7 +1,10 @@
 FROM node:20-slim
 #RUN apt-get update && apt-cache policy libgnutls30
 RUN apt-get update \
-    && apt-get install --only-upgrade -y libgnutls30 \
+    && apt-get install --only-upgrade -y \
+        libgnutls30 \
+        libcap2 \
+        libpcre2-8-0 \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY ./app/package*.json /app
