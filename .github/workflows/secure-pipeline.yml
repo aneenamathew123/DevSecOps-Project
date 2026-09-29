@@ -94,6 +94,11 @@ jobs:
 
        runs-on: ubuntu-latest
 
+       permissions:
+        contents: read
+        actions: read
+        packages: write
+
        steps:
 
        - name: Checkout Code
