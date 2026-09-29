@@ -141,7 +141,6 @@ jobs:
          with:
             image-ref: 'ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }}'
             format: 'table'
-            dependency-tree: true
             exit-code: '1'
             ignore-unfixed: true
             vuln-type: 'os,library'

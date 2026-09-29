@@ -1,5 +1,6 @@
 FROM node:20-slim
 #RUN apt-get update && apt-cache policy libgnutls30
+RUN npm install -g npm@10.9.3
 RUN apt-get update \
     && apt-get install --only-upgrade -y \
         libgnutls30 \
