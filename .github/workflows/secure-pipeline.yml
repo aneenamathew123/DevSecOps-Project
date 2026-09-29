@@ -118,23 +118,30 @@ jobs:
             load: true
             tags: ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }}
 
-       - name: Locate brace-expansion
+       - name: Check image packages
          run: |
-               docker run --rm ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} \
-               find /app/node_modules -path '*/brace-expansion/package.json' -print
-               
-       - name: Check production dependency tree
-         run: |
-               docker run --rm ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} \
-               npm ls brace-expansion --omit=dev
+                docker run --rm \
+                  ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }} \
+                  sh -c '
+                    echo "=== Node ==="
+                    node --version
+                    npm --version
 
+                    echo "=== brace-expansion ==="
+                    find / -path "*/brace-expansion/package.json" 2>/dev/null \
+                      -exec sh -c "echo === \$1; grep \"version\" \$1" _ {} \;
 
-         ## Image scan for known vulnerabilities
+                    echo "=== OS ==="
+                    cat /etc/os-release
+                  '
+
+        ## Image scan for known vulnerabilities
        - name: Run Trivy vulnerability scanner
          uses: aquasecurity/trivy-action@v0.36.0
          with:
             image-ref: 'ghcr.io/${{ github.repository_owner }}/node-app:${{ github.sha }}'
             format: 'table'
+            dependency-tree: true
             exit-code: '1'
             ignore-unfixed: true
             vuln-type: 'os,library'
