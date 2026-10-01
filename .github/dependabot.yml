@@ -1,0 +1,31 @@
+version: 2
+updates:
+
+    ## Application dependencies
+  - package-ecosystem: "npm"
+    directory: "/app"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+
+    labels:
+      - "dependencies"
+      - "npm"
+    assignees:
+      - "aneenamathew123"
+
+    ## Docker base image
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+    labels:
+      - "dependencies"
+      - "docker"
+    assignees:
+      - "aneenamathew123"
+
+
+   
